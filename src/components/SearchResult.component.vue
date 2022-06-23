@@ -1,12 +1,18 @@
 <template>
-
+<h1> {{ msg }} </h1>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld.component',
+  name: 'SearchResult.component',
   props: {
     msg: String
+  },
+  setup(props) {
+
+    return {
+      msg: props.msg
+    }
   }
 }
 </script>
