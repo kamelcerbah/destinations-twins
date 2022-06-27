@@ -14,7 +14,7 @@
       />
       <button class="btn btn-outline-success my-2" type="submit" @click="findSimilarStates">Search</button>
     </form>
-    <SearchResult :searchInput="searchInput" />
+    <SearchResult v-if="searchClicked" :searchInput="searchInput" />
     
   </div>
 </template>
@@ -29,14 +29,18 @@ export default {
     SearchResult,
   },
   setup(){
+    let searchClicked = ref(false);
     const searchInput = ref('');
     const findSimilarStates = () => {
-      alert(searchInput.value);
+      //alert(searchInput.value);
+      searchClicked.value =  searchClicked.value ? false : true;
+
     };
   
     
     return {
       searchInput,
+      searchClicked,
       findSimilarStates,
     }
   }
