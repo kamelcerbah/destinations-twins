@@ -1,27 +1,47 @@
 <template>
-  <div>
-    <h1>{{title}}</h1>
-   
+  <div class="container">
+    <div class="row row-cols-2 justify-content-center">
+      <div
+        class="card text-start"
+        style="width: 18rem"
+        v-for="country in countries"
+        :key="country.id"
+      >
+        <!-- <img :src="`http://localhost/destination-twins-images/${country.name}.jpg`" class="card-img-top" alt="flag" /> -->
+        <img
+          :src="` https://flagcdn.com/256x192/${country.isoCode.toLowerCase()}.png `"
+          width="256"
+          height="192"
+          :alt="country.name"
+        />
+        <div class="card-body">
+          <p class="card-text">
+            {{ country.name }} have similar state name , learn more about them.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { ref,toRef } from '@vue/reactivity';
+import { ref, toRef } from "@vue/reactivity";
+import { Country, State, City }  from 'country-state-city';
 export default {
-  name: 'SearchResult.component',
+  name: "SearchResult.component",
   props: {
-    searchInput: String
+    searchInput: String,
   },
   setup(props) {
-   
-    const title = toRef(props, 'searchInput');
+    let countries = Country.getAllCountries();
+    console.log(countries[0].name);
+
+    const title = toRef(props, "searchInput");
     console.log(title.value);
 
-
-
-
     return {
-      title
+      title,
+      countries,
     };
   },
 };

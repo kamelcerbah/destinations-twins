@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5 mx-auto text-center">
+  <div class="container mt-5 mx-auto text-center ">
     <nav>
       <ul class="nav justify-content-center">
         <li class="nav-item mx-2">

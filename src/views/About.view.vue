@@ -11,30 +11,21 @@
 </div>
     -->
     <!--show the country in a bootstrap  card-->
-    <div class="card" >
-      <div class="card-body">
-        <h5 class="card-title">{{country.name}}</h5>
-        <p class="card-text">{{country.isoCode}}</p>
-      </div>
-    </div>
+    
 
   </div>
 </template>
 
 <script>
-import { Country, State, City }  from 'country-state-city';
+
 
 
 export default ({
   setup() {
-   
-    console.log(Country.getAllCountries());
-    let country = Country.getAllCountries()[0];
-     let text = 'This is '+ country.name ;
-    return {
-      text,
-      country
 
+     let text = 'This is About page ' ;
+    return {
+      text
     }
   },
 })

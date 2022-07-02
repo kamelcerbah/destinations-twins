@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container ">
     <div class="row my-3">
       <h1 class="fw-light">Welcome</h1>
       <p class="h3 fw-light">Find countries with similar states "only this for now" and cities</p>
@@ -14,7 +14,7 @@
       />
       <button class="btn btn-outline-success my-2" type="submit" @click="findSimilarStates">Search</button>
     </form>
-    <SearchResult v-if="searchClicked" :searchInput="searchInput" />
+    <SearchResult v-if="true" :searchInput="searchInput" />
     
   </div>
 </template>
