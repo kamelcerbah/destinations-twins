@@ -14,7 +14,7 @@
       />
       <button class="btn btn-outline-success my-2" type="submit" @click="findSimilarStates">Search</button>
     </form>
-    <SearchResult v-if="true" :searchInput="searchInput" />
+    <SearchResult v-if="searchClicked" :searchInput="searchInput" />
     
   </div>
 </template>

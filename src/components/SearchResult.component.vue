@@ -12,6 +12,7 @@
           :src="` https://flagcdn.com/256x192/${country.isoCode.toLowerCase()}.png `"
           width="256"
           height="192"
+          class="card-img-top"
           :alt="country.name"
         />
         <div class="card-body">
@@ -27,20 +28,47 @@
 <script>
 import { ref, toRef } from "@vue/reactivity";
 import { Country, State, City }  from 'country-state-city';
+import { stringSimilarity } from "string-similarity-js";
+
 export default {
   name: "SearchResult.component",
   props: {
     searchInput: String,
   },
   setup(props) {
-    let countries = Country.getAllCountries();
-    console.log(countries[0].name);
+    //props
+    const searchInput = toRef(props, "searchInput");
 
-    const title = toRef(props, "searchInput");
-    console.log(title.value);
+  
+    
+
+    //get all countries from the country-state-city library
+    let countries = Country.getAllCountries();
+    //filter the countries that have similar state name to the search input
+    // let filteredCountries = countries.filter(
+    //   (country) =>
+    //     country.name.toLowerCase().includes(props.searchInput.toLowerCase())
+    // );
+
+
+
+    //get all states from the country-state-city library
+    let states = State.getAllStates();
+    //filter the states that have similar state name to the search input
+     if(searchInput.value.length >2){
+     var filteredStates = states.filter(
+       (state) =>
+          stringSimilarity(state.name, searchInput.value) > 0.4
+     );
+     //console.log(filteredStates);
+     }
+
+     //fileter contries that have similar state name to the search input
+ 
+    
 
     return {
-      title,
+      searchInput,
       countries,
     };
   },
