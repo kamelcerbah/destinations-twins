@@ -17,7 +17,7 @@
         />
         <div class="card-body">
           <p class="card-text">
-            {{ country.name }} have similar state name , learn more about them.
+            {{ country.name }} has a similar state name , learn more about them.
           </p>
         </div>
       </div>

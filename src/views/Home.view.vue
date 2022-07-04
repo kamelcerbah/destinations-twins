@@ -22,6 +22,8 @@
 <script>
 // @ is an alias to /src
 import SearchResult from "@/components/SearchResult.component.vue";
+import { Country, State, City }  from 'country-state-city';
+import { stringSimilarity } from "string-similarity-js";
 import { ref } from 'vue';
 export default {
   name: "HomeView",
@@ -31,9 +33,21 @@ export default {
   setup(){
     let searchClicked = ref(false);
     const searchInput = ref('');
+
+    let states = State.getAllStates();
+    //filter the states that have similar state name to the search input
+     if(searchInput.value.length >2){
+     var filteredStates = states.filter(
+       (state) =>
+          stringSimilarity(state.name, searchInput.value) > 0.4
+     );
+     }
+
+
     const findSimilarStates = () => {
       //alert(searchInput.value);
       searchClicked.value =  searchClicked.value ? false : true;
+      
 
     };
   
