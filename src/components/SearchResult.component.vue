@@ -4,7 +4,7 @@
       <div
         class="card text-start"
         style="width: 18rem"
-        v-for="country in countries"
+        v-for="country in filteredCountries"
         :key="country.id"
       >
         <!-- <img :src="`http://localhost/destination-twins-images/${country.name}.jpg`" class="card-img-top" alt="flag" /> -->
@@ -26,24 +26,35 @@
 </template>
 
 <script>
-import { ref, toRef } from "@vue/reactivity";
+import { ref, toRef,computed  } from "@vue/reactivity";
 import { Country, State, City }  from 'country-state-city';
 import { stringSimilarity } from "string-similarity-js";
+//add computed
 
 export default {
   name: "SearchResult.component",
   props: {
-    searchInput: String,
+    filteredCountries: {
+      type: Array,
+      required: false,
+    },
   },
   setup(props) {
     //props
-    const searchInput = toRef(props, "searchInput");
+    // let filteredCountries = toRef(props, "filteredCountries");
+    // console.log(filteredCountries.value);
+    //calculate filteredCountries on computed method
+    const filteredCountries = toRef(props, "filteredCountries");
+
+    console.log(filteredCountries);
+
 
   
     
 
     //get all countries from the country-state-city library
-    let countries = Country.getAllCountries();
+
+    //let countries = filteredCountries;
     //filter the countries that have similar state name to the search input
     // let filteredCountries = countries.filter(
     //   (country) =>
@@ -53,23 +64,24 @@ export default {
 
 
     //get all states from the country-state-city library
-    let states = State.getAllStates();
+    //let states = State.getAllStates();
     //filter the states that have similar state name to the search input
-     if(searchInput.value.length >2){
-     var filteredStates = states.filter(
-       (state) =>
-          stringSimilarity(state.name, searchInput.value) > 0.4
-     );
-     //console.log(filteredStates);
-     }
+    //  if(searchInput.value.length >2){
+    //  var filteredStates = states.filter(
+    //    (state) =>
+    //       stringSimilarity(state.name, searchInput.value) > 0.4
+    //  );
+    //  console.log(filteredStates);
+    //  }
 
      //fileter contries that have similar state name to the search input
  
     
 
     return {
-      searchInput,
-      countries,
+      filteredCountries
+      // searchInput,
+      // countries,
     };
   },
 };
