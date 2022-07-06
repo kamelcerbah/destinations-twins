@@ -40,48 +40,14 @@ export default {
     },
   },
   setup(props) {
-    //props
-    // let filteredCountries = toRef(props, "filteredCountries");
-    // console.log(filteredCountries.value);
-    //calculate filteredCountries on computed method
+
     const filteredCountries = toRef(props, "filteredCountries");
-
     console.log(filteredCountries);
-
-
-  
-    
-
-    //get all countries from the country-state-city library
-
-    //let countries = filteredCountries;
-    //filter the countries that have similar state name to the search input
-    // let filteredCountries = countries.filter(
-    //   (country) =>
-    //     country.name.toLowerCase().includes(props.searchInput.toLowerCase())
-    // );
-
-
-
-    //get all states from the country-state-city library
-    //let states = State.getAllStates();
-    //filter the states that have similar state name to the search input
-    //  if(searchInput.value.length >2){
-    //  var filteredStates = states.filter(
-    //    (state) =>
-    //       stringSimilarity(state.name, searchInput.value) > 0.4
-    //  );
-    //  console.log(filteredStates);
-    //  }
-
-     //fileter contries that have similar state name to the search input
- 
     
 
     return {
       filteredCountries
-      // searchInput,
-      // countries,
+
     };
   },
 };

@@ -17,7 +17,7 @@
       <button
         class="btn btn-outline-success my-2"
         type="submit"
-        @click="findSimilarStates"
+        @click="similarCountries"
       >
         Search
       </button>
@@ -40,44 +40,48 @@ export default {
   setup() {
     let searchClicked = ref(false);
     const searchInput = ref("");
-    var filteredCountries =[];
+    var filteredCountries = ref([]);
 
-    const findSimilarStates = () => {
-      //alert(searchInput.value);
+    /* FUNCTIONs */
+    const getSimilarStates = () => {
+      let filteredStates = [];
+
+      //get all states of the world with country-state-city library
+      let states = State.getAllStates();
+
+      //filter the states that have similar state name to the search input
+      //when search input is over 3 characters
+
+      filteredStates = states.filter(
+        (state) => stringSimilarity(state.name, searchInput.value) > 0.4
+      );
+
+      return filteredStates;
+    };
+    const similarCountries = async () => {
+      // searchResult switching
       searchClicked.value = searchClicked.value ? false : true;
 
-      let states = State.getAllStates();
-      //filter the states that have similar state name to the search input
-      if (searchInput.value.length > 2) {
-        var filteredStates = states.filter(
-          (state) => stringSimilarity(state.name, searchInput.value) > 0.4
-        );
-       // console.log(filteredStates);
+      let filteredStates = [];
 
+      //get countries from filtered states
 
+      filteredStates = await getSimilarStates();
+      //console.log(filteredStates);
+      filteredCountries.value = [];
 
-
-        //get countries from filtered states
-        //let countryOne = Country.getCountryByCode(filteredStates[2].countryCode);
-        //console.log(countryOne);
-
-
-        //get countries from filtered states
-        
-        for (let state of filteredStates) {
-          let country = Country.getCountryByCode(state.countryCode);
-          filteredCountries.push(country);
-        }
-        //console.log(filteredCountries);
+      for (let state of filteredStates) {
+        let country = Country.getCountryByCode(state.countryCode);
+        filteredCountries.value.push(country);
       }
+      
     };
 
     return {
       searchInput,
       searchClicked,
       filteredCountries,
-      
-      findSimilarStates
+      similarCountries,
     };
   },
 };
