@@ -1,6 +1,8 @@
 <template>
   <div class="container">
     <div class="row row-cols-2 justify-content-center">
+
+
       <div
         class="card text-start"
         style="width: 18rem"
